@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import Logo from "../assets/GdscLogo.png";
+import Logo from "../assets/Gdsclogo.png";
 
 export default function Navbar() {
   return (
