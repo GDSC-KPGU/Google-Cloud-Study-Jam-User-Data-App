@@ -10,7 +10,7 @@ export default function Navbar() {
         <div className=" flex flex-wrap items-center justify-between mx-auto p-4">
           <a href="https://gdsc.community.dev/drs-kiran-pallavi-patel-global-university-kpgu-vadodara/" className="flex items-center">
             <img src={Logo} className="h-8 mr-3" alt="GDSC Logo" />
-            <span className="self-center text-1xl font-semibold whitespace-nowrap dark:text-white">
+            <span className="self-center sm:text-1xl lg:text-2xl font-semibold whitespace-nowrap dark:text-white">
               Google Cloud Study Jams - GDSC KPGU
             </span>
           </a>
