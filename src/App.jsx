@@ -101,8 +101,8 @@ function App() {
               <tbody id="gccp_body">
                 {data.map((d, i) => (
                   <tr key={i}>
-                    <td className="px-4 py-2">{i + 1}</td>
-                    <td className="px-4 py-2">
+                    <td className="px-11 py-2 ml-5">{i + 1}</td>
+                    <td className="px-11 ml-4 py-2">
                       <a
                         href={d["Google Cloud Skills Boost Profile URL"]}
                         target="_blank"
@@ -111,14 +111,14 @@ function App() {
                         {d["Student Name"]}
                       </a>
                     </td>
-                    <td className="px-4 py-2">
+                    <td className="px-10 py-2">
                       {d["Redemption Status"] === "Yes" ? "✅" : "⚠️"}
                     </td>
-                    <td className="px-4 py-2">{d["# of Courses Completed"]}</td>
-                    <td className="px-4 py-2">
+                    <td className="px-10 py-2">{d["# of Courses Completed"]}</td>
+                    <td className="px-10 py-2">
                       {d["# of GenAI Game Completed"]}
                     </td>
-                    <td className="px-4 py-2">
+                    <td className="px-10 py-2">
                       {d["Total Completions of both Pathways"]}
                     </td>
                   </tr>
