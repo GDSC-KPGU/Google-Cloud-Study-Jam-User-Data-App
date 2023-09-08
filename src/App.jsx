@@ -1,6 +1,8 @@
+/** @format */
+
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import Navbar from "./components/Navbar"; // Assuming your Navbar component path is correct
+import Navbar from "./componets/Navbar";
 import jsonData from "./data.json";
 
 function App() {
@@ -10,10 +12,16 @@ function App() {
   const [totalReg, setTotalReg] = useState(0);
 
   const compare = (a, b) => {
-    if (parseInt(a["# of Courses Completed"]) > parseInt(b["# of Courses Completed"])) {
+    if (
+      parseInt(a["# of Courses Completed"]) >
+      parseInt(b["# of Courses Completed"])
+    ) {
       return -1;
     }
-    if (parseInt(a["# of Courses Completed"]) < parseInt(b["# of Courses Completed"])) {
+    if (
+      parseInt(a["# of Courses Completed"]) <
+      parseInt(b["# of Courses Completed"])
+    ) {
       return 1;
     }
     return 0;
