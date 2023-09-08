@@ -1,4 +1,5 @@
 /** @format */
+
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Navbar from "./componets/Navbar";
@@ -27,9 +28,10 @@ function App() {
   };
 
   const updateData = (filterValue) => {
-    let filteredData = jsonData.data;
+    let filteredData = jsonData.Sheet1; // Assuming the data is stored in a "Sheet1" property
+
     if (filterValue !== "") {
-      filteredData = jsonData.data.filter((el) =>
+      filteredData = jsonData.Sheet1.filter((el) =>
         el["Student Name"].toLowerCase().includes(filterValue.toLowerCase())
       );
     }
@@ -37,7 +39,7 @@ function App() {
     filteredData.sort(compare);
 
     let totalStartedCount = 0;
-    filteredData.forEach((d, i) => {
+    filteredData.forEach((d) => {
       totalStartedCount += d["Redemption Status"] === "Yes" ? 1 : 0;
     });
 
@@ -61,10 +63,10 @@ function App() {
       <div className="min-h-screen bg-gray-900 text-white">
         <div className="container mx-auto py-10 px-4 sm:px-6 lg:px-8">
           <div className="text-center my-5">
-            <div className="relative mx-auto  sm:w-3/4 mt-5">
+            <div className="relative mx-auto sm:w-3/4 mt-5">
               <input
                 id="input"
-                className="px-4 py-2 sm:w-60 md:w-1/2 lg:w-full xl:w-full  text-black rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
+                className="px-4 py-2 sm:w-60 md:w-1/2 lg:w-full xl:w-full text-black rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
                 type="text"
                 id="gccp_search"
                 value={filter}
