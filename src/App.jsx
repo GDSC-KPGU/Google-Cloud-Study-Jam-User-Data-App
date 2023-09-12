@@ -1,8 +1,6 @@
-/** @format */
-
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import Navbar from "./componets/Navbar";
+import Navbar from "./components/Navbar";
 import jsonData from "./data.json";
 
 function App() {
@@ -12,26 +10,20 @@ function App() {
   const [totalReg, setTotalReg] = useState(0);
 
   const compare = (a, b) => {
-    if (
-      parseInt(a["# of Courses Completed"]) >
-      parseInt(b["# of Courses Completed"])
-    ) {
+    if (parseInt(a["# of Courses Completed"]) > parseInt(b["# of Courses Completed"])) {
       return -1;
     }
-    if (
-      parseInt(a["# of Courses Completed"]) <
-      parseInt(b["# of Courses Completed"])
-    ) {
+    if (parseInt(a["# of Courses Completed"]) < parseInt(b["# of Courses Completed"])) {
       return 1;
     }
     return 0;
   };
 
   const updateData = (filterValue) => {
-    let filteredData = jsonData.Sheet1; // Assuming the data is stored in a "Sheet1" property
+    let filteredData = jsonData["Babaria Institute of Technology"];
 
     if (filterValue !== "") {
-      filteredData = jsonData.Sheet1.filter((el) =>
+      filteredData = filteredData.filter((el) =>
         el["Student Name"].toLowerCase().includes(filterValue.toLowerCase())
       );
     }
@@ -108,6 +100,7 @@ function App() {
                       <a
                         href={d["Google Cloud Skills Boost Profile URL"]}
                         target="_blank"
+                        rel="noopener noreferrer"
                         className="text-blue-500"
                       >
                         {d["Student Name"]}
@@ -127,6 +120,10 @@ function App() {
                 ))}
               </tbody>
             </table>
+          </div>
+          <div className="mt-5">
+            <p>Total Registered: {totalReg}</p>
+            <p>Total Started: {totalStarted}</p>
           </div>
         </div>
       </div>
