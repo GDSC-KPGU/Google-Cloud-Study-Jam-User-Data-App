@@ -1,6 +1,8 @@
+/** @format */
+
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import Navbar from "./components/Navbar";
+import Navbar from "./componets/Navbar";
 import jsonData from "./data.json";
 
 function App() {
@@ -10,10 +12,16 @@ function App() {
   const [totalReg, setTotalReg] = useState(0);
 
   const compare = (a, b) => {
-    if (parseInt(a["# of Courses Completed"]) > parseInt(b["# of Courses Completed"])) {
+    if (
+      parseInt(a["# of Courses Completed"]) >
+      parseInt(b["# of Courses Completed"])
+    ) {
       return -1;
     }
-    if (parseInt(a["# of Courses Completed"]) < parseInt(b["# of Courses Completed"])) {
+    if (
+      parseInt(a["# of Courses Completed"]) <
+      parseInt(b["# of Courses Completed"])
+    ) {
       return 1;
     }
     return 0;
@@ -109,7 +117,9 @@ function App() {
                     <td className="px-10 py-2">
                       {d["Redemption Status"] === "Yes" ? "✅" : "⚠️"}
                     </td>
-                    <td className="px-10 py-2">{d["# of Courses Completed"]}</td>
+                    <td className="px-10 py-2">
+                      {d["# of Courses Completed"]}
+                    </td>
                     <td className="px-10 py-2">
                       {d["# of GenAI Game Completed"]}
                     </td>
