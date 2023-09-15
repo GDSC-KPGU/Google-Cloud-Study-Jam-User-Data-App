@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Navbar from "./componets/Navbar";
@@ -12,23 +10,17 @@ function App() {
   const [totalReg, setTotalReg] = useState(0);
 
   const compare = (a, b) => {
-    if (
-      parseInt(a["# of Courses Completed"]) >
-      parseInt(b["# of Courses Completed"])
-    ) {
+    if (parseInt(a["# of Courses Completed"]) > parseInt(b["# of Courses Completed"])) {
       return -1;
     }
-    if (
-      parseInt(a["# of Courses Completed"]) <
-      parseInt(b["# of Courses Completed"])
-    ) {
+    if (parseInt(a["# of Courses Completed"]) < parseInt(b["# of Courses Completed"])) {
       return 1;
     }
     return 0;
   };
 
   const updateData = (filterValue) => {
-    let filteredData = jsonData["Babaria Institute of Technology"];
+    let filteredData = jsonData;
 
     if (filterValue !== "") {
       filteredData = filteredData.filter((el) =>
@@ -87,7 +79,16 @@ function App() {
                     <b>Name</b>
                   </th>
                   <th className="px-4 py-2">
-                    <b>Redemption Status</b>
+                    <b>Email</b>
+                  </th>
+                  <th className="px-4 py-2">
+                    <b>Institution</b>
+                  </th>
+                  <th className="px-4 py-2">
+                    <b>Enrolment Date & Time</b>
+                  </th>
+                  <th className="px-4 py-2">
+                    <b>Enrolment Status</b>
                   </th>
                   <th className="px-4 py-2">
                     <b>Course Completed</b>
@@ -97,6 +98,12 @@ function App() {
                   </th>
                   <th className="px-4 py-2">
                     <b>Total Completion</b>
+                  </th>
+                  <th className="px-4 py-2">
+                    <b>Redemption Status</b>
+                  </th>
+                  <th className="px-4 py-2">
+                    <b>Profile URL</b>
                   </th>
                 </tr>
               </thead>
@@ -115,7 +122,16 @@ function App() {
                       </a>
                     </td>
                     <td className="px-10 py-2">
-                      {d["Redemption Status"] === "Yes" ? "✅" : "⚠️"}
+                      {d["Student Email"]}
+                    </td>
+                    <td className="px-10 py-2">
+                      {d["Institution"]}
+                    </td>
+                    <td className="px-10 py-2">
+                      {d["Enrolment Date & Time"]}
+                    </td>
+                    <td className="px-10 py-2">
+                      {d["Enrolment Status"]}
                     </td>
                     <td className="px-10 py-2">
                       {d["# of Courses Completed"]}
@@ -125,6 +141,18 @@ function App() {
                     </td>
                     <td className="px-10 py-2">
                       {d["Total Completions of both Pathways"]}
+                    </td>
+                    <td className="px-10 py-2">
+                      {d["Redemption Status"] === "Yes" ? "✅" : "⚠️"}
+                    </td>
+                    <td className="px-10 py-2">
+                      <a
+                        href={d["Google Cloud Skills Boost Profile URL"]}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Profile
+                      </a>
                     </td>
                   </tr>
                 ))}
