@@ -9,10 +9,11 @@ const app = express();
 const port=3000;
 const mongoose=require('mongoose');
 const cors =require('cors');
+require('dotenv').config();
 const cron = require('node-cron');
 // Load your JSON data
 const jsonData = require('./data.json');
-mongoose.connect('mongodb+srv://Jazzy49:MyNodeApp@nodeprojects.tsxlcqi.mongodb.net/Gcloud?retryWrites=true&w=majority', {
+mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -117,7 +118,7 @@ async function fetchAndParseBadges(jsonData) {
 
   return jsonData; // Return the updated JSON data
 }
-cron.schedule('*/10 * * * *', async () => {
+cron.schedule('*/2 * * * *', async () => {
   console.log('Running cron job to update data...');
   await fetchAndParseBadges(jsonData);
 });
