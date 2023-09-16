@@ -15,19 +15,6 @@ function App() {
     try {
       const response = await axios.get("https://study-jams-leaderboard.onrender.com/fetch-badges"); // Replace with your backend server URL
       setData(response.data.Sheet1); // Assuming the data is stored in a "Sheet1" property
-
-      // Sort the data by the sum of "GenAI Completed" and "Course Completed"
-      const sortedData = response.data.Sheet1.sort((a, b) => {
-        const totalA =
-          parseInt(a["# of Courses Completed"]) +
-          parseInt(a["# of GenAI Game Completed"]);
-        const totalB =
-          parseInt(b["# of Courses Completed"]) +
-          parseInt(b["# of GenAI Game Completed"]);
-        return totalB - totalA;
-      });
-
-      setData(sortedData);
     } catch (error) {
       console.error("Error fetching data from backend:", error);
     }
@@ -38,8 +25,14 @@ function App() {
   }, []);
 
   const handleInputChange = (event) => {
-    updateData(event.target.value);
+    setFilter(event.target.value); // Update the search query state
   };
+
+  const filteredData = data.filter((item) => {
+    // Filter data based on the search query
+    const studentName = item["Student Name"].toLowerCase();
+    return studentName.includes(filter.toLowerCase());
+  });
 
   const columns = [
     {
@@ -125,7 +118,7 @@ function App() {
             </div>
           </div>
           <div className="overflow-x-auto">
-            <Table columns={columns} data={data} />
+            <Table columns={columns} data={filteredData} />
           </div>
         </div>
       </div>
