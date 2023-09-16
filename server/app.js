@@ -94,56 +94,32 @@ async function fetchBadgesForProfile(profile) {
 async function fetchAndParseBadges(jsonData) {
   const profiles = jsonData["Sheet1"].slice(0, 106);
   const studentsData = [];
-  // await Student.deleteMany({});
+ 
   // Process profiles one by one sequentially
   for (const profile of profiles) {
-    const existingStudent = await Student.findOne({ studentName: profile["Student Name"] });
-  
-    if (existingStudent) {
-      // Update the existing student record
-      await Student.updateOne(
-        { studentName: profile["Student Name"] },
-        {
-          $set: {
-            studentEmail: profile["Student Email"],
-            institution: profile["Institution"],
-            enrolmentDateTime: profile["Enrolment Date & Time"],
-            enrolmentStatus: profile["Enrolment Status"],
-            googleCloudSkillsBoostProfileURL: profile["Google Cloud Skills Boost Profile URL"],
-            numberOfCoursesCompleted: profile["# of Courses Completed"],
-            numberOfSkillBadgesCompleted: profile["# of Courses Completed"] + profile["# of GenAI Game Completed"],
-            numberOfGenAIGameCompleted: profile["# of GenAI Game Completed"],
-            totalCompletionsOfBothPathways: profile["Total Completions of both Pathways"],
-            redemptionStatus: profile["Redemption Status"],
-          },
-        }
-      );
-    } else {
-      // Insert a new student record
-      const newStudent = new Student({
-        studentName: profile["Student Name"],
-        studentEmail: profile["Student Email"],
-        institution: profile["Institution"],
-        enrolmentDateTime: profile["Enrolment Date & Time"],
-        enrolmentStatus: profile["Enrolment Status"],
-        googleCloudSkillsBoostProfileURL: profile["Google Cloud Skills Boost Profile URL"],
-        numberOfCoursesCompleted: profile["# of Courses Completed"],
-        numberOfSkillBadgesCompleted: profile["# of Courses Completed"] + profile["# of GenAI Game Completed"],
-        numberOfGenAIGameCompleted: profile["# of GenAI Game Completed"],
-        totalCompletionsOfBothPathways: profile["Total Completions of both Pathways"],
-        redemptionStatus: profile["Redemption Status"],
-      });
-  
-      await newStudent.save();
-    }
+    await fetchBadgesForProfile(profile);
+    studentsData.push({
+      studentName: profile["Student Name"],
+      studentEmail: profile["Student Email"],
+      institution: profile["Institution"],
+      enrolmentDateTime: profile["Enrolment Date & Time"],
+      enrolmentStatus: profile["Enrolment Status"],
+      googleCloudSkillsBoostProfileURL: profile["Google Cloud Skills Boost Profile URL"],
+      numberOfCoursesCompleted: profile["# of Courses Completed"],
+      numberOfSkillBadgesCompleted: profile["# of Courses Completed"] +  profile["# of GenAI Game Completed"],
+      numberOfGenAIGameCompleted:  profile["# of GenAI Game Completed"],
+      totalCompletionsOfBothPathways: profile["Total Completions of both Pathways"],
+      redemptionStatus: profile["Redemption Status"],
+    });
   }
-  
+  await Student.deleteMany({});
+  await Student.insertMany(studentsData);
 
   console.log(`Saved data for ${studentsData.length} students`);
 
   return jsonData; // Return the updated JSON data
 }
-cron.schedule('*/2 * * * *', async () => {
+cron.schedule('*/5 * * * *', async () => {
   console.log('Running cron job to update data...');
   await fetchAndParseBadges(jsonData);
 });
