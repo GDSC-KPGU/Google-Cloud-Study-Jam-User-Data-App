@@ -14,7 +14,16 @@ function App() {
   const fetchDataFromBackend = async () => {
     try {
       const response = await axios.get("https://study-jams-leaderboard.onrender.com/fetch-badges"); // Replace with your backend server URL
-      setData(response.data.Sheet1); // Assuming the data is stored in a "Sheet1" property
+      const sortedData = response.data.Sheet1.sort((a, b) => {
+        const totalA =
+          parseInt(a["# of Courses Completed"]) +
+          parseInt(a["# of GenAI Game Completed"]);
+        const totalB =
+          parseInt(b["# of Courses Completed"]) +
+          parseInt(b["# of GenAI Game Completed"]);
+        return totalB - totalA;
+      });
+      setData(sortedData); // Assuming the data is stored in a "Sheet1" property
     } catch (error) {
       console.error("Error fetching data from backend:", error);
     }
