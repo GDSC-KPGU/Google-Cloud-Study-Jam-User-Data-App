@@ -118,7 +118,7 @@ async function fetchAndParseBadges(jsonData) {
 
   return jsonData; // Return the updated JSON data
 }
-cron.schedule('*/2 * * * *', async () => {
+cron.schedule('*/20 * * * *', async () => {
   console.log('Running cron job to update data...');
   await fetchAndParseBadges(jsonData);
 });
