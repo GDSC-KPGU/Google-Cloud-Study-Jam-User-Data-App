@@ -13,7 +13,7 @@ function App() {
   // Function to fetch data from the backend
   const fetchDataFromBackend = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/fetch-badges"); // Replace with your backend server URL
+      const response = await axios.get("https://study-jams-leaderboard.onrender.com/fetch-badges"); // Replace with your backend server URL
       setData(response.data.Sheet1); // Assuming the data is stored in a "Sheet1" property
 
       // Sort the data by the sum of "GenAI Completed" and "Course Completed"
