@@ -62,20 +62,22 @@ function App() {
         </a>
       ),
     },
-    {
-      Header: "Redemption Status",
-      accessor: "Redemption Status",
-      Cell: (props) =>
-        props.value === "Yes" ? (
-          <span role="img" aria-label="Yes">
-            ✅
-          </span>
-        ) : (
-          <span role="img" aria-label="No">
-            ⚠️
-          </span>
-        ),
-    },
+{
+  Header: "Redemption Status",
+  accessor: (row) =>
+    parseInt(row["# of GenAI Game Completed"]) === 1 ? "Yes" : "No",
+  Cell: (props) =>
+    props.value === "Yes" ? (
+      <span role="img" aria-label="Yes">
+        ✅
+      </span>
+    ) : (
+      <span role="img" aria-label="No">
+        ⚠️
+      </span>
+    ),
+},
+
     {
       Header: "Course Completed",
       accessor: "# of Courses Completed",
