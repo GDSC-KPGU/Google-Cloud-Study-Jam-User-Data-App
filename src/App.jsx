@@ -64,8 +64,15 @@ function App() {
     },
 {
   Header: "Redemption Status",
-  accessor: (row) =>
-    parseInt(row["# of GenAI Game Completed"]) === 1 ? "Yes" : "No",
+  accessor: (row) => {
+    // Check if Redemption Status is already "Yes"
+    if (row["Redemption Status"] === "Yes") {
+      return "Yes";
+    } else {
+      // Check if GenAI Game Completed is 1
+      return parseInt(row["# of GenAI Game Completed"]) === 1 ? "Yes" : "No";
+    }
+  },
   Cell: (props) =>
     props.value === "Yes" ? (
       <span role="img" aria-label="Yes">
@@ -77,6 +84,7 @@ function App() {
       </span>
     ),
 },
+
 
     {
       Header: "Course Completed",
