@@ -47,7 +47,7 @@ function App() {
   });
   const calculateTotalCompletion = () => {
     // Calculate the total completion count based on the "Total Completion" column
-    const totalCompletionCount = filteredData.reduce((count, item) => {
+    const totalCompletionCount = data.reduce((count, item) => {
       const coursesCompleted = parseInt(item["# of Courses Completed"]);
       const genAIGameCompleted = parseInt(item["# of GenAI Game Completed"]);
       const shouldDisplayCheckmark = coursesCompleted === 8 && genAIGameCompleted === 1;
