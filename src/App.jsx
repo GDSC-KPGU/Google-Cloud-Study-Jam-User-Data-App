@@ -3,8 +3,6 @@ import "./App.css";
 import Navbar from "./componets/Navbar";
 import { useTable } from "react-table";
 import axios from "axios"; // Import axios
-import Confetti from 'react-confetti'; // Import the Confetti component
-
 
 function App() {
   const [filter, setFilter] = useState("");
@@ -44,23 +42,6 @@ function App() {
     const studentName = item["Student Name"].toLowerCase();
     return studentName.includes(filter.toLowerCase());
   });
-  const calculateTotalCompletion = () => {
-    // Calculate the total completion count based on the "Total Completion" column
-    const totalCompletionCount = filteredData.reduce((count, item) => {
-      const coursesCompleted = parseInt(item["# of Courses Completed"]);
-      const genAIGameCompleted = parseInt(item["# of GenAI Game Completed"]);
-      const shouldDisplayCheckmark = coursesCompleted === 8 && genAIGameCompleted === 1;
-      
-      return shouldDisplayCheckmark ? count + 1 : count;
-    }, 0);
-  
-    return totalCompletionCount;
-  };
-  
-
-  const totalCompletion = calculateTotalCompletion();
-  const remainingCompletion = 40 - totalCompletion; // Calculate remaining completion
-  const progressBarWidth = (totalCompletion / 40) * 100; // Calculate the width for the progress bar
 
   const columns = [
     {
@@ -138,10 +119,6 @@ function App() {
 
   return (
     <>
-    <Confetti // Add the Confetti component here
-      width={window.innerWidth}
-      height={window.innerHeight}
-    />
       <Navbar />
       <div className="min-h-screen bg-gray-900 text-white">
         <div className="container mx-auto py-10 px-4 sm:px-6 lg:px-8">
@@ -160,37 +137,6 @@ function App() {
             </div>
           </div>
           <div className="overflow-x-auto">
-          <div className="mb-4">
-          <p className="text-center text-white py-4 text-2xl">
-  🎉 Congratulations! {totalCompletion} have successfully Completed 🎉
-</p>
-
-  <div className="ml-64 relative">
-    <div className="bg-red-500 h-8 rounded-full relative max-w-4xl">
-      <div
-        className="bg-green-500 h-8 rounded-full"
-        style={{ width: `${progressBarWidth}%`, transition: "width 1s ease-in-out" }}
-      >
-        <span className="absolute inset-0 flex items-center justify-center text-white">
-          {progressBarWidth}%
-        </span>
-      </div>
-    </div>
-   
-    <img className="absolute right-0 top-0   m h-32 w-32 mr-44 " style={{ top: "-60px" }} src="https://cdn-icons-png.flaticon.com/512/4033/4033298.png" alt="Prize" />
-    <p className="text-center text-white ml-[720px] mt-12 ">T shirts and stickers(Swags)</p>
-  </div>
-  <p className="text-center text-white py-4 text-4xl">
-  <mark class="px-2 text-white bg-red-600 rounded dark:bg-red-500 mr-4 ">{remainingCompletion}  </mark> completions are required to cross tier 3
-  </p>
-</div>
-
-
-
-
-
-
-
             <Table columns={columns} data={filteredData} />
           </div>
         </div>
