@@ -5,11 +5,10 @@ import Navbar from "./componets/Navbar";
 import { useTable } from "react-table";
 import axios from "axios"; // Import axios
 import Confetti from 'react-confetti'; // Import the Confetti component
-import {Routes,Route}from "react-router-dom";
-import ContributorsPage from "./Contributors";
-import Homepage from "./Homepage";
+import CountdownTimer from "./Countdowntimer";
 
-function App() {
+
+function Homepage() {
   const [filter, setFilter] = useState("");
   const [data, setData] = useState([]);
   const [totalStarted, setTotalStarted] = useState(0);
@@ -145,11 +144,62 @@ function App() {
       width={window.innerWidth}
       height={window.innerHeight}
     />
-    
-      <Routes>
-        <Route path="/Contributors" element={(<ContributorsPage/>) }/>
-        <Route path="/" element={(<Homepage/>) }/>
-      </Routes>
+      <Navbar />
+      
+      <CountdownTimer/>
+      <div className="min-h-screen bg-gray-900 text-white">
+        <div className="container mx-auto py-10 px-4 sm:px-6 lg:px-8">
+          <div className="text-center my-5">
+            <div className="relative mx-auto sm:w-3/4 mt-5">
+              <input
+                id="input"
+                className="px-4 py-2 sm:w-60 md:w-1/2 lg:w-full xl:w-full text-black rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
+                type="text"
+                id="gccp_search"
+                value={filter}
+                onChange={handleInputChange}
+                placeholder="Search by Name"
+              />
+              <i className="absolute top-2 right-2 text-gray-400 fas fa-search"></i>
+            </div>
+          </div>
+          <div className="overflow-x-auto">
+          <div className="mb-4">
+          <p className="text-center text-white py-4 text-2xl">
+  🎉 Congratulations! {totalCompletion} have successfully Completed 🎉
+</p>
+
+  <div className="ml-44 relative">
+    <div className="bg-red-500 h-8 rounded-full relative max-w-4xl">
+      <div
+        className="bg-green-500 h-8 rounded-full"
+        style={{ width: `${progressBarWidth}%`, transition: "width 1s ease-in-out" }}
+      >
+        <span className="absolute inset-0 flex items-center justify-center text-white">
+          {progressBarWidth}%
+        </span>
+      </div>
+    </div>
+   
+    <img className="absolute right-0 top-0   m h-32 w-32 mr-18 " style={{ top: "-64px" }} src="https://cdn-icons-png.flaticon.com/512/4033/4033298.png" alt="Prize" />
+    <p className="text-center text-white ml-[900px] mt-12 ">T shirts and stickers(Swags)</p>
+  </div>
+  <p className="text-center text-white py-4 text-4xl">
+  <mark class="px-2 text-white bg-red-600 rounded dark:bg-red-500 mr-4 ">{remainingCompletion}  </mark> completions are required to cross tier 3
+  </p>
+</div>
+
+
+
+
+
+
+
+            <Table columns={columns} data={filteredData} />
+          </div>
+        </div>
+      </div>
+   
     </>
   );
 }
@@ -207,4 +257,4 @@ const Table = ({ columns, data }) => {
   );
 };
 
-export default App;
+export default Homepage;
