@@ -20,7 +20,7 @@ const ContributorsPage = () => {
   }, []);
 
   return (
-    <main className="bg-gray-900 ">
+    <main className="bg-gray-900 min-h-screen">
       <section className="Team ">
         <div className="team-top my-0" id="slide">
           <div className="heading-contributors my-0">Meet our Conrtibutors (Hover to see )</div>
