@@ -8,12 +8,6 @@
     border: 2.5px solid gray;
   }
 
-  .team-members {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 20px;
-  
-  }
 
   .team-member {
     text-align: center;
@@ -162,6 +156,15 @@
   -webkit-text-fill-color: transparent;
   background-size: 200%;
   animation: shine 2.5s infinite;
+}
+
+@media only screen and (min-width: 850px){
+  
+  .team-members {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+  }
 }
 
 @keyframes shine{
